@@ -5,20 +5,26 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const packageConfig = require('../package.json')
 
 exports.assetsPath = function (_path) {
-  const assetsSubDirectory = process.env.NODE_ENV === 'production'
-    ? config.build.assetsSubDirectory
-    : config.dev.assetsSubDirectory
+  const assetsSubDirectory = process.env.NODE_ENV === 'production' ?
+    config.build.assetsSubDirectory :
+    config.dev.assetsSubDirectory
 
   return path.posix.join(assetsSubDirectory, _path)
 }
 
 exports.cssLoaders = function (options) {
   options = options || {}
-
   const cssLoader = {
     loader: 'css-loader',
     options: {
       sourceMap: options.sourceMap
+    }
+  }
+  //移动端适配
+  const px2remLoader = {
+    loader: 'px2rem-loader',
+    options: {
+      remUnit: 75
     }
   }
 
@@ -30,7 +36,8 @@ exports.cssLoaders = function (options) {
   }
 
   // generate loader string to be used with extract text plugin
-  function generateLoaders (loader, loaderOptions) {
+  function generateLoaders(loader, loaderOptions) {
+    //如果使用移动端适配 最后数组添加[cssLoader,px2remLoader]
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
 
     if (loader) {
@@ -59,7 +66,9 @@ exports.cssLoaders = function (options) {
     css: generateLoaders(),
     postcss: generateLoaders(),
     less: generateLoaders('less'),
-    sass: generateLoaders('sass', { indentedSyntax: true }),
+    sass: generateLoaders('sass', {
+      indentedSyntax: true
+    }),
     scss: generateLoaders('sass'),
     stylus: generateLoaders('stylus'),
     styl: generateLoaders('stylus')

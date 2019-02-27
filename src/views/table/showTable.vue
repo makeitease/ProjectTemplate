@@ -21,9 +21,6 @@ export default {
 };
 </script>
 <style scoped>
-ul {
-  list-style: none;
-}
 li {
   font: 300 20px/40px "simsun";
   text-indent: 2em;

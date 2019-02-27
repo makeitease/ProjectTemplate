@@ -1,5 +1,5 @@
 {
-  "name": "basedemo",
+  "name": "demo",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "zhangshujun <webzhangshujun@163.com>",
@@ -11,6 +11,10 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "iview": "^3.2.2",
+    "lib-flexible": "^0.3.2",
+    "px2rem-loader": "^0.1.9",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
