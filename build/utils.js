@@ -14,20 +14,19 @@ exports.assetsPath = function (_path) {
 
 exports.cssLoaders = function (options) {
   options = options || {}
+
   const cssLoader = {
     loader: 'css-loader',
     options: {
       sourceMap: options.sourceMap
     }
   }
-  //移动端适配
   const px2remLoader = {
     loader: 'px2rem-loader',
     options: {
-      remUnit: 75
+      remUnit: 75 //设计稿宽度的十分之一
     }
   }
-
   const postcssLoader = {
     loader: 'postcss-loader',
     options: {
@@ -37,8 +36,7 @@ exports.cssLoaders = function (options) {
 
   // generate loader string to be used with extract text plugin
   function generateLoaders(loader, loaderOptions) {
-    //如果使用移动端适配 最后数组添加[cssLoader,px2remLoader]
-    const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
+    const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader, px2remLoader]
 
     if (loader) {
       loaders.push({
